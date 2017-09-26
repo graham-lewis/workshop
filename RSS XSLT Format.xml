@@ -1,0 +1,56 @@
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+    <xsl:include href="/_cascade/formats/xslt/_common"/>
+    <xsl:template match="/system-index-block">
+        <rss version="2.0">
+            <channel>
+                <title>Example Feed</title>
+                <link>
+                    <xsl:value-of select="$domain"/>
+                </link>
+                <description>The latest news for the site.</description>
+                <language>en-us</language>
+                <pubDate>
+                    <xsl:call-template name="format-date">
+                        <xsl:with-param name="date"/>
+                        <xsl:with-param name="mask">ddd, dd mmm yyyy HH:MM:ss Z</xsl:with-param>
+                    </xsl:call-template>
+                </pubDate>
+                <generator>Cascade Server</generator>
+                <webMaster>webmaster@example.edu</webMaster>
+                <xsl:apply-templates select="system-page[not(contains(path,'base'))]">
+                    <xsl:sort case-order="upper-first" data-type="number" lang="en" order="descending" select="start-date"/>
+                </xsl:apply-templates>
+            </channel>
+        </rss>
+    </xsl:template>
+    <xsl:template match="system-page">
+        <item>
+            <title>
+                <xsl:value-of select="title"/>
+            </title>
+            <link>
+                <xsl:value-of select="concat($domain,path,$ext)"/>
+            </link>
+            <description>
+                <xsl:variable name="short">
+                    <xsl:call-template name="removeHtmlTags">
+                        <xsl:with-param name="html" select="system-data-structure/content/node()"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:value-of select="normalize-space(substring($short, 0, 250))"/>
+                <xsl:text>&#160;...</xsl:text>
+            </description>
+            <pubDate>
+                <xsl:call-template name="format-date">
+                    <xsl:with-param name="date">
+                        <xsl:value-of select="start-date"/>
+                    </xsl:with-param>
+                    <xsl:with-param name="mask">ddd, dd mmm yyyy HH:MM:ss Z</xsl:with-param>
+                </xsl:call-template>
+            </pubDate>
+            <guid>
+                <xsl:value-of select="concat($domain,path,$ext)"/>
+            </guid>
+        </item>
+    </xsl:template>
+</xsl:stylesheet>
