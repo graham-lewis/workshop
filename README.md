@@ -3,9 +3,10 @@ This is a repository for all files need during the CUC17 Exchange Workshop
 
 
 
+
 ## Site Files to Download:
-* FacultyDirectory.csse
-* _Calendar 2017.csse
+* [Faculty Directory](FacultyDirectory.csse)
+* [_Calendar 2017.csse](_Calendar 2017.csse)
 
 
 
