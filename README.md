@@ -11,5 +11,5 @@ This is a repository for all files need during the CUC17 Exchange Workshop
 
 
 ## RSS Files
-- [Velocity](RSS/RSS Velocity Format.vm)/[XSLT](RSS/RSS XSLT Format.xml)
+- [Velocity](RSS/RSS Velocity Format.vm) / [XSLT](RSS/RSS XSLT Format.xml)
 - [Template](RSS/XML Template.xml)
